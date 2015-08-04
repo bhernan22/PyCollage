@@ -17,7 +17,7 @@ def cutBox(im):
     region = im.crop(box)
     findAverageColor(region)
 
-def findAverageColor(im):
+def findAverageColor(im):#This is all Jelly!!
     red = 0
     green = 0
     blue = 0

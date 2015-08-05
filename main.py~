@@ -23,7 +23,7 @@ def findAverageColor(im):#This is all Jelly!!
     green = 0
     blue = 0
 
-    x, y = im.size # gets height and width
+    x, y = im.size
     count = 0 
 
     pixels = im.load()

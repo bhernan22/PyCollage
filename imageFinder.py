@@ -23,24 +23,35 @@ def ImageSearch(query, path):
         for image_info in json.loads(r.text)['responseData']['results']:
             url = image_info['unescapedUrl']
             try:
-                image_r = requests.get(url)
+                r = requests.get(url)
             except ConnectionError, e:
                 print 'Failed to download %s' % url
+                start -= 1
                 continue
-            title = image_info['titleNoFormatting'].replace('/','').replace('\\','')
+
+            try:
+                title = image_info['titleNoFormatting'].replace('/','_').replace('\\','_')
+                title.replace(' ', '_')
+                print title
     
-            file = open(os.path.join(BASE_PATH, '%s.jpg') % title, 'w')
+                file = open(os.path.join(BASE_PATH, '%s.jpg') % title, 'w')
+            except:
+                print 'Could not encode bla bla'
+                start -= 1
+                continue
             try:
                 Image.open(StringIO(r.content)).save(file, 'JPEG')
             except IOError, e:
                 print 'Failed to save %s' % url
+                start -= 1
                 continue
             finally:
                 file.close()
-    print start
-    start += 3
-    time.sleep(1.5)
+        start += 4
+        time.sleep(1.5)
+        print start
+
         
 
 
-ImageSearch('Fairies', 'temps')
+ImageSearch('wallpapers', 'temps')

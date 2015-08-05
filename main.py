@@ -2,8 +2,8 @@ from PIL import Image
 #from imageFinder import ImageSearch
 
 
-HOR = 250
-VER = 250
+HOR = 100
+VER = 100
 
 
 def main():
@@ -37,7 +37,7 @@ def cutBox(im):
         endY = VER
         startX += HOR
         endX += HOR
-
+ 
     return regions
 
 def findAverageColor(im):#This is all Jelly!!
@@ -60,16 +60,15 @@ def findAverageColor(im):#This is all Jelly!!
     avgRed = red/count
     avgGreen = green/count
     avgBlue = blue/count
-    print (avgRed, avgGreen, avgBlue)
-    im.show()
+    return(avgRed, avgGreen, avgBlue)
+
+def pixConverter(lis):
+    ColorDigits = []
+    for pix in lis:
+        ColorDigits.append(findAverageColor(pix))
+    return ColorDigits
 
 #main()
 
-im = Image.open('test.jpg')
-
-lis = cutBox(im)
-print len(lis)
-for pix in lis:
-    pix.show()
 
 #findAverageColor(im)

@@ -12,7 +12,7 @@ def resize(path, folder, size):
 
     for images in filenames:
         im = Image.open(directory + images)
-        im.show()
+        #im.show()
         width, height = im.size
     
         if(width >= height):
@@ -21,11 +21,11 @@ def resize(path, folder, size):
         else:
             box = (0,0,width,width)
             im = im.crop(box)
-        im.show()
+        #im.show()
         im.thumbnail(size, Image.ANTIALIAS)
         resized.append(im)
-        im.show()
-        print im.size
+        #im.show()
+        #print im.size
     return resized
 
 

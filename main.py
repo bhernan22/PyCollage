@@ -1,22 +1,44 @@
 from PIL import Image
+#from imageFinder import ImageSearch
 
-HOR = 25
-VER = 25
+
+HOR = 250
+VER = 250
 
 
 def main():
+    
+    
     im = Image.open("test.jpg")
     width, height = im.size
     print width, height
-    cutBox(im)
+    query = raw_input('What type of images would you like to fill with?')
+    HOR = raw_input('How many boxes X')
+    VER = raw_input('How many boxes Y')
+    ImageSearch(query, 'temps')
+    regions = cutBox(im)
 
 def cutBox(im):
     startX = 0
     startY = 0
-    box = (startX, startY, HOR, VER)
-    region = im.crop(box)
-    region.show()
-    findAverageColor(region)
+    endX = HOR
+    endY = VER
+    width, height = im.size
+    regions = []
+    while endX < width:
+        while endY < height:
+            
+            box = (startX, startY, endX, endY)
+            region = im.crop(box)
+            regions.append(region)
+            startY += VER
+            endY += VER
+        startY = 0
+        endY = VER
+        startX += HOR
+        endX += HOR
+
+    return regions
 
 def findAverageColor(im):#This is all Jelly!!
     red = 0
@@ -41,4 +63,13 @@ def findAverageColor(im):#This is all Jelly!!
     print (avgRed, avgGreen, avgBlue)
     im.show()
 
-main()
+#main()
+
+im = Image.open('test.jpg')
+
+lis = cutBox(im)
+print len(lis)
+for pix in lis:
+    pix.show()
+
+#findAverageColor(im)

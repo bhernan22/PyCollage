@@ -1,6 +1,6 @@
 from PIL import Image
 #from imageFinder import ImageSearch
-
+// making a comment to test ssh key
 
 HOR = 100
 VER = 100
